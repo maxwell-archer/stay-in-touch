@@ -1,0 +1,777 @@
+<title>Stay in Touch</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Stay in Touch Design System V1 — tokens mirrored from CRM/Design System/tokens.css */
+:root {
+  --font-sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --t-display: 32px; --t-title: 24px; --t-heading: 19px; --t-body: 16px; --t-small: 14px; --t-caption: 12px;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 20px; --s6: 24px; --s8: 32px; --s10: 40px; --s16: 64px;
+  --screen-pad: 16px; --app-max: 720px; --analysis-max: 1100px;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-pill: 9999px;
+  --shadow-lift: 0 2px 10px oklch(22% 0.02 260 / 0.10);
+  --shadow-overlay: 0 12px 32px oklch(22% 0.02 260 / 0.20);
+  --dur-color: 120ms; --dur-enter: 180ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --paper: oklch(98.2% 0.004 95); --surface: oklch(100% 0 0); --surface-subtle: oklch(95.6% 0.006 95);
+  --ink: oklch(22% 0.02 260); --ink-2: oklch(44% 0.02 260); --ink-3: oklch(53% 0.015 260);
+  --border: oklch(89.5% 0.008 95); --border-strong: oklch(76% 0.01 260);
+  --action: oklch(49% 0.16 268); --action-hover: oklch(43% 0.16 268); --action-wash: oklch(95.5% 0.025 268);
+  --on-action: oklch(100% 0 0); --danger: oklch(52% 0.18 27);
+  --state-turn-fg: var(--action); --state-turn-wash: var(--action-wash);
+  --state-live-fg: oklch(48% 0.12 155); --state-live-wash: oklch(95.5% 0.035 155);
+  --state-drift-fg: oklch(50% 0.11 65); --state-drift-wash: oklch(95.5% 0.05 85);
+  --state-dormant-fg: oklch(48% 0.08 300); --state-dormant-wash: oklch(95.5% 0.02 300);
+  --state-none-fg: var(--ink-3); --state-none-wash: var(--surface-subtle);
+}
+@media (min-width: 768px) { :root { --screen-pad: 24px; } }
+@media (min-width: 1024px) { :root { --screen-pad: 32px; --t-display: 44px; --t-title: 28px; --t-heading: 20px; } }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: oklch(18% 0.008 260); --surface: oklch(22% 0.01 260); --surface-subtle: oklch(26% 0.012 260);
+    --ink: oklch(94% 0.006 95); --ink-2: oklch(76% 0.012 260); --ink-3: oklch(65% 0.012 260);
+    --border: oklch(32% 0.014 260); --border-strong: oklch(46% 0.016 260);
+    --action: oklch(74% 0.13 268); --action-hover: oklch(80% 0.11 268); --action-wash: oklch(30% 0.06 268);
+    --on-action: oklch(18% 0.02 268); --danger: oklch(72% 0.15 27);
+    --state-live-fg: oklch(80% 0.13 155); --state-live-wash: oklch(29% 0.05 155);
+    --state-drift-fg: oklch(84% 0.12 80); --state-drift-wash: oklch(31% 0.05 75);
+    --state-dormant-fg: oklch(80% 0.07 300); --state-dormant-wash: oklch(30% 0.04 300);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: oklch(18% 0.008 260); --surface: oklch(22% 0.01 260); --surface-subtle: oklch(26% 0.012 260);
+  --ink: oklch(94% 0.006 95); --ink-2: oklch(76% 0.012 260); --ink-3: oklch(65% 0.012 260);
+  --border: oklch(32% 0.014 260); --border-strong: oklch(46% 0.016 260);
+  --action: oklch(74% 0.13 268); --action-hover: oklch(80% 0.11 268); --action-wash: oklch(30% 0.06 268);
+  --on-action: oklch(18% 0.02 268); --danger: oklch(72% 0.15 27);
+  --state-live-fg: oklch(80% 0.13 155); --state-live-wash: oklch(29% 0.05 155);
+  --state-drift-fg: oklch(84% 0.12 80); --state-drift-wash: oklch(31% 0.05 75);
+  --state-dormant-fg: oklch(80% 0.07 300); --state-dormant-wash: oklch(30% 0.04 300);
+  color-scheme: dark;
+}
+
+html, body { overflow-x: clip; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-sans); font-size: var(--t-body); line-height: 1.5; }
+.wrap { max-width: var(--analysis-max); margin-inline: auto; padding-inline: var(--screen-pad); }
+h1, h2, h3, h4 { margin: 0; line-height: 1.15; font-weight: 700; text-wrap: balance; overflow-wrap: anywhere; min-width: 0; }
+h1 { font-size: var(--t-display); letter-spacing: -0.02em; }
+h2 { font-size: var(--t-title); letter-spacing: -0.01em; }
+h3 { font-size: var(--t-heading); font-weight: 600; }
+p { margin: 0; max-width: 66ch; }
+a { color: var(--action); }
+:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.ink2 { color: var(--ink-2); } .ink3 { color: var(--ink-3); } .small { font-size: var(--t-small); } .cap { font-size: var(--t-caption); }
+.stack { display: grid; gap: var(--s4); } .stack-sm { display: grid; gap: var(--s2); } .stack-lg { display: grid; gap: var(--s8); }
+.icon { width: 16px; height: 16px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+
+.topnav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-lift); }
+.topnav .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s3); min-height: 56px; }
+.topnav b { font-size: var(--t-heading); }
+.topnav nav { display: flex; gap: var(--s5); font-size: var(--t-small); font-weight: 600; }
+.topnav nav a { color: var(--ink); text-decoration: none; padding-block: var(--s3); white-space: nowrap; }
+.topnav nav a:hover { color: var(--action); }
+
+section { padding-block: var(--s10); }
+.hero { padding-block: var(--s10) var(--s6); }
+.dek { font-size: 18px; color: var(--ink-2); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: var(--s3); }
+.tile { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: var(--s4); display: grid; gap: var(--s1); }
+.tile__label { font-size: var(--t-small); font-weight: 600; color: var(--ink-2); }
+.tile__metric { font-family: var(--font-mono); font-size: 32px; font-weight: 500; line-height: 1.1; }
+.tile__q { font-size: var(--t-small); color: var(--ink-2); }
+.tile__src { font-size: var(--t-caption); color: var(--ink-3); }
+
+.callout { border-radius: var(--r-md); padding: var(--s4); font-size: var(--t-small); display: grid; gap: var(--s1); }
+.callout b { font-size: var(--t-body); }
+.callout--info { background: var(--action-wash); }
+.callout--notice { background: var(--state-drift-wash); }
+.callout--calm { background: var(--state-live-wash); }
+
+/* StateBadge, RingBadge, chips */
+.badge { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600; padding: 2px 10px 2px 8px; border-radius: var(--r-pill); white-space: nowrap; }
+.badge .icon { width: 14px; height: 14px; }
+.b-turn { color: var(--state-turn-fg); background: var(--state-turn-wash); }
+.b-live { color: var(--state-live-fg); background: var(--state-live-wash); }
+.b-drifting { color: var(--state-drift-fg); background: var(--state-drift-wash); }
+.b-dormant { color: var(--state-dormant-fg); background: var(--state-dormant-wash); }
+.b-nodata { color: var(--state-none-fg); background: var(--state-none-wash); }
+.ring { display: inline-flex; font-size: 13px; font-weight: 500; color: var(--ink-2); border: 1px solid var(--border-strong); border-radius: var(--r-pill); padding: 1px 9px; white-space: nowrap; }
+.src-chip { display: inline-flex; align-items: center; gap: 4px; font-size: var(--t-caption); color: var(--ink-2); }
+.src-chip .icon { width: 14px; height: 14px; }
+
+/* App */
+.app { max-width: var(--app-max); margin-inline: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: clip; display: grid; grid-template-rows: auto 1fr auto; min-height: 640px; }
+.app__top { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); padding: var(--s4) var(--screen-pad); border-bottom: 1px solid var(--border); }
+.app__top h2 { font-size: var(--t-title); }
+.app__body { padding: var(--s4) var(--screen-pad) var(--s8); display: grid; gap: var(--s5); align-content: start; min-width: 0; }
+.tabbar { position: sticky; bottom: 0; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); background: var(--surface-subtle); box-shadow: var(--shadow-lift); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.tab { font: inherit; background: none; border: 0; color: var(--ink-2); display: grid; justify-items: center; gap: 2px; padding: 10px 4px; font-size: var(--t-caption); font-weight: 600; cursor: pointer; min-height: 56px; }
+.tab .icon { width: 22px; height: 22px; }
+.tab[aria-current="page"] { color: var(--action); }
+
+.band { display: grid; gap: var(--s3); padding-bottom: var(--s5); border-bottom: 1px solid var(--border); }
+.band:last-child { border-bottom: 0; }
+.band__head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s3); flex-wrap: wrap; }
+.band__head h3 { font-size: var(--t-heading); }
+.stackbar { display: flex; height: 10px; border-radius: var(--r-pill); overflow: hidden; background: var(--surface-subtle); }
+.stackbar i { display: block; height: 100%; }
+.legend { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s4); font-size: var(--t-caption); color: var(--ink-2); }
+.legend span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 5px; background: var(--sw); }
+
+.prow { display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: var(--s3); align-items: center; padding: var(--s2) var(--s2); margin-inline: calc(-1 * var(--s2)); border-radius: var(--r-sm); min-height: 56px; cursor: pointer; text-align: left; background: none; border: 0; font: inherit; color: inherit; width: calc(100% + 2 * var(--s2)); }
+.prow:hover { background: var(--surface-subtle); }
+.avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--surface-subtle); display: grid; place-items: center; font-size: 12px; font-weight: 600; color: var(--ink-2); }
+.prow__name { font-weight: 600; overflow-wrap: anywhere; }
+.prow__meta { font-size: var(--t-small); color: var(--ink-2); }
+.prow__gap { font-family: var(--font-mono); font-size: var(--t-caption); color: var(--ink-3); }
+.livecount { font-size: var(--t-small); color: var(--ink-2); display: flex; gap: var(--s2); align-items: center; flex-wrap: wrap; }
+
+.btn { font: inherit; font-size: var(--t-small); font-weight: 600; min-height: 44px; padding-inline: var(--s4); border-radius: var(--r-sm); border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink); cursor: pointer; white-space: nowrap; transition: background-color var(--dur-color), border-color var(--dur-color), color var(--dur-color); display: inline-flex; align-items: center; gap: 6px; }
+.btn:hover { border-color: var(--ink-2); }
+.btn--primary { background: var(--action); border-color: var(--action); color: var(--on-action); }
+.btn--primary:hover { background: var(--action-hover); border-color: var(--action-hover); }
+.btn--quiet { border-color: transparent; background: transparent; color: var(--action); padding-inline: var(--s2); }
+.btn--quiet:hover { border-color: transparent; text-decoration: underline; }
+.btn.is-done { background: var(--state-live-fg); border-color: var(--state-live-fg); color: var(--on-action); }
+.actions { display: flex; flex-wrap: wrap; gap: var(--s2); }
+
+.seg { display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; background: var(--surface-subtle); border-radius: var(--r-pill); width: fit-content; max-width: 100%; }
+.seg button { font: inherit; font-size: var(--t-small); font-weight: 600; border: 0; background: none; color: var(--ink-2); padding: 6px 14px; border-radius: var(--r-pill); cursor: pointer; min-height: 36px; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-lift); }
+
+.pick { border: 1px solid var(--border); border-radius: var(--r-md); padding: var(--s4); display: grid; gap: var(--s3); }
+.pick__top { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s2); flex-wrap: wrap; }
+.pick__top h3 { font-size: var(--t-heading); }
+.progress { display: grid; gap: var(--s2); }
+.track { height: 6px; background: var(--surface-subtle); border-radius: var(--r-pill); overflow: hidden; }
+.track i { display: block; height: 100%; background: var(--state-live-fg); border-radius: var(--r-pill); transition: width var(--dur-enter) var(--ease-out); }
+.choices { display: grid; gap: var(--s2); }
+.choice { font: inherit; font-size: var(--t-small); font-weight: 600; min-height: 48px; display: flex; align-items: center; gap: var(--s2); padding-inline: var(--s4); border: 1px solid var(--border-strong); border-radius: var(--r-sm); background: var(--surface); color: var(--ink); cursor: pointer; text-align: left; }
+.choice:hover { border-color: var(--action); background: var(--action-wash); }
+.logged { font-size: var(--t-small); color: var(--state-live-fg); display: flex; align-items: center; gap: 6px; }
+.nudge { border: 1px dashed var(--border-strong); border-radius: var(--r-md); padding: var(--s4); display: grid; gap: var(--s2); }
+.nudge__text { font-size: var(--t-body); }
+
+.kv { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: var(--s2) var(--s4); font-size: var(--t-small); margin: 0; }
+.kv dt { color: var(--ink-3); } .kv dd { margin: 0; }
+.auto { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); margin-left: 6px; }
+@media (max-width: 359px) { .kv { grid-template-columns: 1fr; } }
+
+.email { font-size: var(--t-small); display: grid; gap: var(--s3); }
+.email__meta { display: grid; gap: 2px; padding-bottom: var(--s3); border-bottom: 1px solid var(--border); color: var(--ink-2); }
+.email__meta b { color: var(--ink); }
+.email ul { margin: 0; padding-left: 18px; display: grid; gap: var(--s1); }
+
+.dt { width: 100%; border-collapse: collapse; font-size: var(--t-small); }
+.dt caption { text-align: left; font-weight: 600; padding-bottom: var(--s2); }
+.dt th, .dt td { text-align: left; padding: var(--s2) var(--s3) var(--s2) 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+.dt th { font-size: var(--t-caption); color: var(--ink-2); font-weight: 600; }
+.dt td.r, .dt th.r { text-align: right; font-family: var(--font-mono); }
+@media (max-width: 767px) {
+  .dt--stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .dt--stack tr { display: grid; gap: 2px; padding-block: var(--s2); border-bottom: 1px solid var(--border); }
+  .dt--stack td { border: 0; padding: 0; }
+  .dt--stack td[data-label]::before { content: attr(data-label) " · "; color: var(--ink-3); font-size: var(--t-caption); font-weight: 600; }
+  .dt--stack td:first-child { font-weight: 600; }
+}
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--s4); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: var(--s5); min-width: 0; }
+
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--surface); color: var(--ink); box-shadow: var(--shadow-overlay); border: 1px solid var(--border); border-radius: var(--r-md); padding: var(--s2) var(--s2) var(--s2) var(--s4); display: flex; align-items: center; gap: var(--s3); font-size: var(--t-small); z-index: 30; max-width: calc(100% - 32px); }
+footer { padding-block: var(--s10); font-size: var(--t-small); color: var(--ink-3); }
+@media (prefers-reduced-motion: reduce) { .btn, .track i { transition: none; } }
+
+/* ===== V3 direction: "Navy wireframe" — DNA studied from a monochrome wireframe kit (Nathan Godding, via Dribbble/Designspiration).
+   Kept: white screens, hairline grey outlines, generous whitespace, light grotesque, one accent used with restraint.
+   Changed: accent is navy and gets a real splash (top bar, ring summary panel, primary actions, "Your turn"). ===== */
+:root {
+  --font-sans: "Albert Sans", "Helvetica Neue", Arial, sans-serif;
+  --navy: oklch(29% 0.09 262); --navy-2: oklch(38% 0.1 262); --navy-tint: oklch(95% 0.02 262); --navy-line: oklch(80% 0.04 262);
+  --on-navy: oklch(98% 0.004 262); --on-navy-2: oklch(80% 0.03 262);
+  --paper: oklch(98.8% 0.002 262); --surface: oklch(100% 0 0); --surface-subtle: oklch(96.5% 0.003 262);
+  --ink: oklch(26% 0.02 262); --ink-2: oklch(47% 0.015 262); --ink-3: oklch(55% 0.012 262);
+  --border: oklch(91% 0.004 262); --border-strong: oklch(78% 0.006 262);
+  --action: var(--navy); --action-hover: var(--navy-2); --action-wash: var(--navy-tint); --on-action: var(--on-navy);
+  --state-turn-fg: var(--on-navy); --state-turn-wash: var(--navy);
+  --state-live-fg: oklch(42% 0.012 262); --state-live-wash: var(--surface-subtle);
+  --state-drift-fg: var(--navy); --state-drift-wash: var(--navy-tint);
+  --state-dormant-fg: oklch(48% 0.012 262); --state-dormant-wash: transparent;
+  --state-none-fg: var(--ink-3); --state-none-wash: transparent;
+  --r-sm: 4px; --r-md: 8px; --r-lg: 12px;
+  --shadow-lift: none;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --navy: oklch(30% 0.08 262); --navy-2: oklch(36% 0.09 262); --navy-tint: oklch(27% 0.05 262); --navy-line: oklch(45% 0.06 262);
+  --paper: oklch(16% 0.025 262); --surface: oklch(19% 0.03 262); --surface-subtle: oklch(23% 0.03 262);
+  --ink: oklch(94% 0.006 262); --ink-2: oklch(76% 0.02 262); --ink-3: oklch(66% 0.02 262);
+  --border: oklch(29% 0.03 262); --border-strong: oklch(42% 0.03 262);
+  --action: oklch(80% 0.07 255); --action-hover: oklch(86% 0.05 255); --on-action: oklch(18% 0.04 262);
+  --state-turn-fg: oklch(18% 0.04 262); --state-turn-wash: oklch(80% 0.07 255);
+  --state-live-fg: oklch(78% 0.015 262); --state-drift-fg: oklch(82% 0.07 255); --state-dormant-fg: oklch(70% 0.015 262);
+} }
+:root[data-theme="dark"] {
+  --navy: oklch(30% 0.08 262); --navy-2: oklch(36% 0.09 262); --navy-tint: oklch(27% 0.05 262); --navy-line: oklch(45% 0.06 262);
+  --paper: oklch(16% 0.025 262); --surface: oklch(19% 0.03 262); --surface-subtle: oklch(23% 0.03 262);
+  --ink: oklch(94% 0.006 262); --ink-2: oklch(76% 0.02 262); --ink-3: oklch(66% 0.02 262);
+  --border: oklch(29% 0.03 262); --border-strong: oklch(42% 0.03 262);
+  --action: oklch(80% 0.07 255); --action-hover: oklch(86% 0.05 255); --on-action: oklch(18% 0.04 262);
+  --state-turn-fg: oklch(18% 0.04 262); --state-turn-wash: oklch(80% 0.07 255);
+  --state-live-fg: oklch(78% 0.015 262); --state-drift-fg: oklch(82% 0.07 255); --state-dormant-fg: oklch(70% 0.015 262);
+  color-scheme: dark;
+}
+body { font-weight: 400; }
+h1 { font-weight: 300; letter-spacing: -0.02em; }
+h2 { font-weight: 400; }
+h3 { font-weight: 500; }
+.topnav { background: var(--navy); border-bottom: 0; }
+.topnav b, .topnav nav a { color: var(--on-navy); }
+.topnav b { font-weight: 500; }
+.topnav nav a:hover { color: var(--on-navy-2); }
+.hero { background: var(--navy); color: var(--on-navy); max-width: none; padding-inline: max(var(--screen-pad), calc((100% - var(--analysis-max)) / 2 + var(--screen-pad))); }
+.hero .dek { color: var(--on-navy-2); }
+.tile { background: transparent; border: 1px solid var(--navy-line); color: var(--on-navy); }
+.tile__label, .tile__q, .tile__src { color: var(--on-navy-2); }
+.tile__metric { font-family: var(--font-sans); font-weight: 300; font-size: 44px; color: var(--on-navy); }
+#finding { background: oklch(100% 0 0 / 0.08); color: var(--on-navy); }
+.badge { font-weight: 500; border: 1px solid transparent; }
+.b-live { border-color: var(--border); }
+.b-dormant { border: 1px dashed var(--border-strong); }
+.b-nodata { border: 1px dashed var(--border-strong); }
+.b-drifting { border-color: var(--navy-line); }
+.ring { border-color: var(--border); }
+.app { border: 1px solid var(--border); }
+.app__top { background: var(--navy); color: var(--on-navy); border-bottom: 0; }
+.app__top .mono { color: var(--on-navy-2); }
+.tabbar { background: var(--surface); }
+.tab[aria-current="page"] { color: var(--navy); }
+.avatar { background: transparent; border: 1px solid var(--border-strong); color: var(--ink-3); }
+.prow { border-bottom: 1px solid var(--border); border-radius: 0; }
+.pick { border-color: var(--border); }
+.pick.is-turn { border-left: 3px solid var(--navy); }
+.btn { font-weight: 500; }
+.callout--info { background: var(--navy-tint); }
+.card { border-color: var(--border); }
+.toast { background: var(--navy); color: var(--on-navy); border: 0; }
+.toast .btn--quiet { color: var(--on-navy-2); }
+
+/* Navy ring summary panel (Rings home) */
+.splash { background: var(--navy); color: var(--on-navy); padding: var(--s5) var(--screen-pad) var(--s6); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s5) var(--s4); }
+@media (min-width: 560px) { .splash { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.sring { font: inherit; color: inherit; background: none; border: 0; text-align: left; padding: 0; cursor: pointer; display: grid; gap: 6px; }
+.sring__name { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-navy-2); }
+.sring__pct { font-size: 36px; font-weight: 300; line-height: 1; font-variant-numeric: tabular-nums; }
+.sring__line { height: 2px; background: oklch(100% 0 0 / 0.18); }
+.sring__line i { display: block; height: 100%; background: var(--on-navy); }
+.sring__meta { font-size: 12px; color: var(--on-navy-2); }
+.sring[aria-pressed="true"] .sring__name { color: var(--on-navy); text-decoration: underline; text-underline-offset: 4px; }
+.app__body { padding-top: 0; }
+.app__body > .splash { margin-inline: calc(-1 * var(--screen-pad)); }
+.plist__head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s3); padding-top: var(--s2); }
+.plist__head h3 { font-size: var(--t-heading); }
+
+/* v2.0 urgency (orange) */
+:root { --urgent: oklch(52% 0.16 45); --urgent-fill: oklch(66% 0.18 50); --urgent-wash: oklch(95.5% 0.04 60); --on-urgent: oklch(100% 0 0); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --urgent: oklch(78% 0.14 55); --urgent-fill: oklch(76% 0.15 55); --urgent-wash: oklch(31% 0.06 50); --on-urgent: oklch(18% 0.04 262); } }
+:root[data-theme="dark"] { --urgent: oklch(78% 0.14 55); --urgent-fill: oklch(76% 0.15 55); --urgent-wash: oklch(31% 0.06 50); --on-urgent: oklch(18% 0.04 262); }
+.b-urgent { background: var(--urgent-fill); color: var(--on-urgent); border-color: var(--urgent-fill); }
+.prow.is-urgent { background: var(--urgent-wash); box-shadow: inset 3px 0 0 var(--urgent); }
+.pick.is-urgent { background: var(--urgent-wash); border-left: 3px solid var(--urgent); }
+.callout--urgent { background: var(--urgent-wash); box-shadow: inset 3px 0 0 var(--urgent); }
+.callout--urgent b { color: var(--urgent); }
+.sring__urgent { font-size: 12px; font-weight: 600; color: var(--urgent-fill); display: inline-flex; gap: 4px; align-items: center; }
+.sring__urgent .icon { width: 13px; height: 13px; }
+
+/* pages + overview */
+.topnav nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+.apppage { padding-block: var(--s6) var(--s10); }
+.today { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); border: 1px solid var(--border); border-radius: var(--r-md); background: var(--surface); }
+.today > div { padding: var(--s4); display: grid; gap: 2px; border-right: 1px solid var(--border); }
+.today > div:last-child { border-right: 0; }
+.today b { font-size: 32px; font-weight: 300; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.today b.is-urgent { color: var(--urgent); }
+.today span { font-size: var(--t-small); color: var(--ink-2); }
+.scroll-x { overflow-x: auto; }
+svg text { font-family: var(--font-sans); font-size: 11px; fill: var(--ink-2); }
+svg .lbl { fill: var(--ink); font-weight: 600; }
+.mover { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s3); padding-block: var(--s2); border-bottom: 1px solid var(--border); font-size: var(--t-small); align-items: center; }
+.mover:last-child { border-bottom: 0; }
+.mover .ink3 { font-size: var(--t-caption); }
+.covrow { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: var(--s3); padding-block: 6px; border-bottom: 1px solid var(--border); font-size: var(--t-small); }
+.covrow:last-child { border-bottom: 0; }
+/* then-vs-now */
+.tn { display: grid; grid-template-columns: 64px minmax(0, 1fr) minmax(120px, auto); gap: var(--s2) var(--s4); align-items: center; padding-block: var(--s3); border-bottom: 1px solid var(--border); }
+.tn:last-child { border-bottom: 0; }
+.tn__name { font-weight: 500; }
+.tn__track { position: relative; height: 24px; }
+.tn__track::before { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 2px; background: var(--border); }
+.tn__bar { position: absolute; top: 11px; height: 2px; background: var(--action); }
+.tn__dot { position: absolute; top: 6px; width: 12px; height: 12px; border-radius: 50%; transform: translateX(-6px); }
+.tn__dot--now { background: var(--action); }
+.tn__dot--then { background: var(--surface); border: 2px solid var(--border-strong); }
+.tn__goal { position: absolute; top: 2px; width: 2px; height: 20px; background: var(--urgent); transform: translateX(-1px); }
+.tn__num { font-size: var(--t-small); color: var(--ink-2); text-align: right; font-variant-numeric: tabular-nums; }
+.tn__num b { font-size: 22px; font-weight: 400; color: var(--ink); margin-right: 6px; }
+.tn__num .up { color: var(--action); } .tn__num .down { color: var(--urgent); }
+/* heatmap */
+.heat { display: grid; gap: 3px; min-width: max-content; }
+.heat__row { display: grid; grid-template-columns: 150px repeat(var(--cols), 16px); gap: 3px; align-items: center; }
+.heat__name { font-size: var(--t-small); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: var(--s2); }
+.heat__ring { font-size: var(--t-caption); color: var(--ink-3); text-transform: uppercase; letter-spacing: .08em; padding-top: var(--s2); }
+.hc { width: 16px; height: 16px; border-radius: 3px; }
+.hc--live { background: var(--action); }
+.hc--turn { background: var(--surface); box-shadow: inset 0 0 0 2px var(--action); }
+.hc--drifting { background: var(--action-wash); box-shadow: inset 0 0 0 1px var(--navy-line); }
+.hc--dormant { background: transparent; box-shadow: inset 0 0 0 1px var(--border-strong); background-image: repeating-linear-gradient(45deg, var(--border-strong) 0 1px, transparent 1px 4px); }
+.hc--nodata { background: transparent; }
+.heat__axis { font-size: 11px; color: var(--ink-3); white-space: nowrap; }
+.legend i { display: inline-block; vertical-align: -2px; margin-right: 6px; }
+.dt td.n, .dt th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.covrow dt { color: var(--ink); font-weight: 500; } .covrow dd { margin: 0; color: var(--ink-2); }
+</style>
+
+<header class="topnav">
+  <div class="wrap">
+    <b>Stay in Touch</b>
+    <nav aria-label="Pages"><a href="#app" data-page="app" aria-current="page">App</a><a href="#overview" data-page="overview">Overview</a></nav>
+  </div>
+</header>
+
+<main>
+  <div id="page-app" class="page">
+    <section class="apppage">
+      <div class="wrap">
+        <div class="app" id="app">
+          <div class="app__top"><h2 id="screenTitle">Rings</h2><span class="cap ink3 mono" id="screenMeta"></span></div>
+          <div class="app__body" id="screen"></div>
+          <nav class="tabbar" aria-label="App">
+            <button class="tab" data-tab="rings" aria-current="page"></button>
+            <button class="tab" data-tab="week"></button>
+            <button class="tab" data-tab="people"></button>
+            <button class="tab" data-tab="report"></button>
+          </nav>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="page-overview" class="page" hidden>
+    <div class="wrap hero stack">
+      <span class="cap mono" style="color:var(--on-navy-2)" id="ovStamp"></span>
+      <h1>Your rings, against reality</h1>
+      <p class="dek">The big picture: who you're keeping up with, and which way it's heading. The lines update every Sunday.</p>
+      <div class="tiles" id="tiles"></div>
+      <div class="callout callout--info" id="finding"></div>
+    </div>
+
+    <section>
+      <div class="wrap stack-lg">
+        <div class="today" id="today"></div>
+
+        <div class="stack-sm"><h2>Keeping up, ring by ring</h2><p class="ink2">How much of each ring you've heard from now, against four weeks ago and against where you'd like it to be.</p></div>
+        <div class="card stack"><div id="thenNow"></div><p class="cap ink3" id="chRingsNote"></p></div>
+
+        <div class="stack-sm"><h2>Your closest people, week by week</h2><p class="ink2">Inner and Close rings. One row per person, one square per Sunday, oldest on the left.</p></div>
+        <div class="card stack-sm"><div class="scroll-x"><div id="heat" class="heat"></div></div><div class="legend" id="heatLegend"></div></div>
+
+        <div class="stack-sm"><h2>The wider circle</h2><p class="ink2">Keep and Wide rings. Each bar is the people you hadn't heard from in time that Sunday, split by why. Down is good.</p></div>
+        <div class="cols">
+          <div class="card stack-sm"><h3>Keep</h3><div class="scroll-x"><svg id="gapKeep" role="img" aria-label="Keep ring people out of touch by week" style="min-width:300px;width:100%;height:auto"></svg></div></div>
+          <div class="card stack-sm"><h3>Wide</h3><div class="scroll-x"><svg id="gapWide" role="img" aria-label="Wide ring people out of touch by week" style="min-width:300px;width:100%;height:auto"></svg></div></div>
+        </div>
+        <div class="legend" id="gapLegend"></div>
+
+        <div class="cols">
+          <div class="card stack-sm"><h3>Waiting on you</h3><p class="small ink2">People who wrote last and hadn't heard back, each Sunday. Orange means it had been a while.</p><div class="scroll-x"><svg id="chTurn" role="img" aria-label="Weekly count of people waiting on you" style="min-width:300px;width:100%;height:auto"></svg></div></div>
+          <div class="card stack-sm"><h3>People you talked to</h3><p class="small ink2">How many of your people you were in touch with, week by week.</p><div class="scroll-x"><svg id="chReach" role="img" aria-label="Weekly count of people reached" style="min-width:300px;width:100%;height:auto"></svg></div></div>
+        </div>
+
+        <div class="cols">
+          <div class="card stack-sm"><h3>Changed since Sunday</h3><div id="movers"></div></div>
+          <div class="card stack-sm"><h3>What I can and can't see</h3><div id="coverage"></div></div>
+        </div>
+
+        <div class="stack-sm" id="most"><h2>Most in touch</h2><p class="ink2">Counted in days you were in touch on any channel: texts, WhatsApp, calls and meetings. Days, not messages, so a chatty texter doesn't outrank a weekly lunch.</p></div>
+        <div class="seg" role="group" aria-label="Time window" id="topSeg"><button data-win="d30" aria-pressed="true">Past 30 days</button><button data-win="d12" aria-pressed="false">Past 12 months</button></div>
+        <div class="card"><table class="dt dt--stack" id="topTable"></table><p class="cap ink3" id="topNote"></p></div>
+      </div>
+    </section>
+
+    <section id="outside">
+      <div class="wrap stack-lg">
+        <div class="stack-sm"><h2>Outside your rings</h2><p class="ink2">The app only nudges you about people in a ring. These folks aren't in one, but a few are waiting on you by email. Answer them, or add them to a ring.</p></div>
+        <table class="dt dt--stack">
+          <caption>Emails you never answered, since April</caption>
+          <thead><tr><th>Person</th><th>What they sent</th><th>Date</th><th>Ring</th></tr></thead>
+          <tbody id="outsideRows"></tbody>
+        </table>
+        <p class="cap ink3" id="outsideNote"></p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="wrap">Built on Stay in Touch Design System v2.0 “Navy wireframe” · CRM/Design System · data read 16 Oct 2026 · rings from CRM/rings.csv</footer>
+<div class="toast" id="toast" hidden role="status"><span id="toastText"></span><button class="btn btn--quiet" id="undo">Undo</button></div>
+
+<script>
+var DATA = __DATA__;
+var WEEKLY = __WEEKLY__;
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var P = {
+    reply: '<polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/>',
+    check: '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
+    down: '<polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/>',
+    moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
+    help: '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>',
+    text: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+    email: '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+    calendar: '<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+    users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+    target: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+    chart: '<path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/>',
+    plane: '<path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>',
+    back: '<path d="m15 18-6-6 6-6"/>',
+    alert: '<circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/>',
+    mic: '<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/>',
+    phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>'
+  };
+  var ic = function (k) { return '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">' + P[k] + '</svg>'; };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  var RINGS = ["Inner", "Close", "Keep", "Wide"], CAP = { Inner: 5, Close: 15, Keep: 50, Wide: 150 };
+  var ST = {
+    turn: ["Your turn", "reply", "b-turn", "var(--state-turn-fg)"],
+    live: ["In touch", "check", "b-live", "var(--state-live-fg)"],
+    drifting: ["Slipping", "down", "b-drifting", "var(--state-drift-fg)"],
+    dormant: ["Gone quiet", "moon", "b-dormant", "var(--state-dormant-fg)"],
+    nodata: ["Not found", "help", "b-nodata", "var(--ink-3)"]
+  };
+  var shown = function (p) { return p.turn ? "turn" : p.state; };
+  var THR = { Inner: 7, Close: 21, Keep: 60, Wide: 180 };
+  var urgent = function (p) { return (p.turn && p.since_me !== null && p.since_me >= THR[p.ring]) || (p.state === "dormant" && (p.ring === "Inner" || p.ring === "Close")); };
+  var pbadge = function (p) { var s = shown(p); if (!urgent(p)) return badge(s); return '<span class="badge b-urgent">' + ic("alert") + ST[s][0] + (s === "turn" ? " · " + p.since_me + " d" : " · " + p.days + " d") + '</span>'; };
+  var badge = function (s) { var d = ST[s]; return '<span class="badge ' + d[2] + '">' + ic(d[1]) + d[0] + '</span>'; };
+  var initials = function (n) { return n.replace(/\(.*?\)/g, "").trim().split(/\s+/).slice(0, 2).map(function (w) { return w[0]; }).join("").toUpperCase(); };
+  var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var fdate = function (iso) { if (!iso) return ""; var d = iso.split("-"); return +d[2] + " " + MON[+d[1] - 1] + (d[0] !== "2026" ? " " + d[0] : ""); };
+  var chName = { text: "Text", whatsapp: "WhatsApp", call: "Call", email: "Email", calendar: "Calendar", voice: "Voice memo", inperson: "In person", other: "Another app" };
+  var chIcon = { text: "text", whatsapp: "text", call: "phone", email: "email", calendar: "calendar", voice: "mic", inperson: "users", other: "text" };
+  var choices = function (name, mode) { return '<span class="small ink2">' + (mode === "log" ? "How'd you connect?" : "How'd you reply?") + '</span>' + ["voice", "call", "inperson", "other"].map(function (c) { return '<button class="choice" data-log="' + esc(name) + '" data-ch="' + c + '">' + ic(chIcon[c]) + chName[c] + '</button>'; }).join(""); };
+  var wrote = function (ch) { return ch === "whatsapp" ? "WhatsApped you" : "Texted you"; };
+  var meta = function (p) {
+    if (p.state === "nodata") return "Can't find them in your texts, email or calendar yet.";
+    if (p.turn) return wrote(p.turn_channel) + " " + fdate(p.turn_date) + ". You haven't been in touch in " + p.since_me + " days.";
+    return chName[p.channel] + " · " + fdate(p.last) + " · " + p.days + (p.days === 1 ? " day" : " days") + " ago";
+  };
+  var mix = function (p) {
+    var ks = Object.keys(p.channels || {}).sort(function (a, b) { return p.channels[b] < p.channels[a] ? -1 : 1; });
+    if (!ks.length) return '<span class="ink3">None</span>';
+    return '<div class="actions" style="gap:6px">' + ks.map(function (k, i) { return '<span class="src-chip" style="' + (i === 0 ? "color:var(--ink);font-weight:600" : "") + '">' + ic(chIcon[k]) + chName[k] + ' · ' + fdate(p.channels[k]) + '</span>'; }).join("") + '</div>';
+  };
+  var row = function (p) {
+    var s = shown(p);
+    var gap = (s !== "live" && p.seen && p.seen !== p.ring) ? '<div class="prow__gap">' + p.ring + ' ring, but lately more like ' + (p.seen === "none" ? "a stranger" : p.seen) + '</div>' : "";
+    return '<button class="prow' + (urgent(p) ? " is-urgent" : "") + '" data-person="' + esc(p.name) + '"><span class="avatar">' + esc(initials(p.name)) + '</span><span><div class="prow__name">' + esc(p.name) + '</div><div class="prow__meta">' + esc(meta(p)) + '</div>' + gap + '</span>' + pbadge(p) + '</button>';
+  };
+  var inRing = function (r) { return DATA.filter(function (p) { return p.ring === r; }); };
+  var count = function (arr, s) { return arr.filter(function (p) { return shown(p) === s; }).length; };
+  var order = { turn: 0, dormant: 1, drifting: 2, nodata: 3, live: 4 };
+  var sortP = function (a, b) { var d = order[shown(a)] - order[shown(b)]; if (d) return d; if (shown(a) === "turn") return b.since_me - a.since_me; return (b.days || 0) - (a.days || 0); };
+
+  // tiles + finding
+  var totalTurn = DATA.filter(function (p) { return p.turn; }).length;
+  $("tiles").innerHTML = RINGS.map(function (r) {
+    var a = inRing(r), live = a.filter(function (p) { return p.state === "live"; }).length;
+    return '<div class="tile"><span class="tile__label">' + r + ' ring</span><span class="tile__metric">' + Math.round(live / a.length * 100) + '%</span><span class="tile__q">' + live + ' of ' + a.length + ' heard from in the last ' + { Inner: "week", Close: "3 weeks", Keep: "2 months", Wide: "6 months" }[r] + '</span></div>';
+  }).join("");
+  var keep = inRing("Keep");
+  $("finding").innerHTML = '<b>You\'re not losing your close people. You\'re leaving replies hanging.</b><span>' + totalTurn + ' people wrote to you last and haven\'t heard back, ' + inRing("Close").filter(function (p) { return p.turn; }).length + ' of them in your Close ring. And ' + (count(keep, "dormant") + count(keep, "drifting")) + ' of the 50 people you want to keep up with have gone a couple of months without a word.</span>';
+
+  // screens
+  var screens = {
+    rings: function (only) {
+      $("screenTitle").textContent = "Rings"; $("screenMeta").textContent = "16 Oct";
+      var splash = '<div class="splash">' + RINGS.map(function (r) {
+        var a = inRing(r), live = a.filter(function (p) { return p.state === "live"; }).length, pct = Math.round(live / a.length * 100);
+        return '<button class="sring" data-ring="' + r + '" aria-pressed="' + (only === r) + '"><span class="sring__name">' + r + '</span><span class="sring__pct">' + pct + '%</span><span class="sring__line"><i style="width:' + pct + '%"></i></span><span class="sring__meta">' + live + ' of ' + a.length + ' · cap ' + CAP[r] + '</span>' + (a.filter(urgent).length ? '<span class="sring__urgent">' + ic("alert") + a.filter(urgent).length + ' been a while</span>' : '') + '</button>';
+      }).join("") + '</div>';
+      var pool = DATA.filter(function (p) { return shown(p) !== "live" && !p.snoozed && !p.rest && (!only || p.ring === only); }).sort(function (a, b) { return (urgent(b) - urgent(a)) || order[shown(a)] - order[shown(b)] || RINGS.indexOf(a.ring) - RINGS.indexOf(b.ring) || (shown(a) === "turn" ? b.since_me - a.since_me : (b.days || 0) - (a.days || 0)); });
+      var limit = only ? 60 : 14;
+      return splash + '<div class="plist__head"><h3>' + (only ? only + ' ring' : 'Who needs you') + '</h3><span class="cap ink3 mono">' + pool.length + ' people</span></div><div>' + pool.slice(0, limit).map(row).join("") + '</div>' +
+        (pool.length > limit ? '<p class="small ink2">' + (pool.length - limit) + ' more. Tap a ring up top to see everyone in it.</p>' : "") +
+        '<p class="cap ink3">Counts texts, voice memos, WhatsApp, calls, email and calendar. Can\'t see Slack, social DMs, or time together nobody texted about.</p>';
+    },
+    week: function () {
+      $("screenTitle").textContent = "This week"; $("screenMeta").textContent = "Sun 18 Oct";
+      var turns = DATA.filter(function (p) { return (p.turn || p.doneWeek) && !p.snoozed && !p.rest; }).sort(function (a, b) { return (urgent(b) - urgent(a)) || RINGS.indexOf(a.ring) - RINGS.indexOf(b.ring) || b.since_me - a.since_me; });
+      var picks = turns.slice(0, 3), waiting = turns.length - 3;
+      return '<div class="progress" aria-live="polite"><span class="small"><b id="doneCount">0 of 3</b> this week</span><div class="track"><i id="doneBar" style="width:0%"></i></div></div>' +
+        picks.map(function (p) {
+          return '<article class="pick is-turn' + (urgent(p) ? " is-urgent" : "") + '"><div class="pick__top"><h3>' + esc(p.name) + '</h3>' + pbadge(p) + '</div><span class="src-chip">' + ic(chIcon[p.turn_channel]) + chName[p.turn_channel] + ' · ' + fdate(p.turn_date) + ' · <span class="ring">' + p.ring + '</span></span><p class="small ink2">' + wrote(p.turn_channel) + ' and is waiting on you. ' + p.since_me + ' days since you were last in touch.</p><div class="actions"><button class="btn btn--primary' + (p.doneWeek ? ' is-done' : '') + '" data-done="' + esc(p.name) + '">' + (p.doneWeek ? 'Done' : 'Mark done') + '</button><button class="btn" data-other="' + esc(p.name) + '">Replied another way</button><button class="btn btn--quiet" data-snooze="' + esc(p.name) + '">Snooze 2 weeks</button></div><div class="choices" hidden></div></article>';
+        }).join("") +
+        '<div class="callout callout--info"><span>' + waiting + ' more after these. They\'ll show up as you clear the top three.</span></div>' +
+        '<div class="nudge"><span class="cap ink3 mono">The text you\'d get · Tue 12:30</span><span class="nudge__text">' + esc(picks[0].name.replace(/\s*\(.*\)$/, "").split(" ")[0]) + ' wrote you on ' + fdate(picks[0].turn_date) + '. Your turn.</span></div>' +
+        '<article class="pick"><div class="pick__top"><h3>' + ic("plane") + ' San Francisco</h3><span class="badge b-nodata">Example</span></div><p class="small ink2">When a trip lands on your calendar, the people you know there show up a week before you go. Like texting a friend there a week before you land. Add cities to people to turn this on.</p></article>';
+    },
+    people: function (filter) {
+      filter = filter || "All";
+      $("screenTitle").textContent = "People"; $("screenMeta").textContent = DATA.length + " people";
+      var list = DATA.filter(function (p) { return filter === "All" || p.ring === filter; }).slice().sort(function (a, b) { return RINGS.indexOf(a.ring) - RINGS.indexOf(b.ring) || a.name.localeCompare(b.name); });
+      return '<div class="seg" role="group" aria-label="Filter by ring">' + ["All"].concat(RINGS).map(function (r) { return '<button data-filter="' + r + '" aria-pressed="' + (r === filter) + '">' + r + '</button>'; }).join("") + '</div><div>' + list.map(row).join("") + '</div>';
+    },
+    report: function () {
+      $("screenTitle").textContent = "Report"; $("screenMeta").textContent = "Emailed monthly";
+      var lines = RINGS.map(function (r) { var a = inRing(r), live = a.filter(function (p) { return p.state === "live"; }).length; return '<tr><td>' + r + '</td><td class="r">' + live + ' / ' + a.length + '</td><td class="r">' + Math.round(live / a.length * 100) + '%</td></tr>'; }).join("");
+      return '<div class="email"><div class="email__meta"><span>To <b>maxwell@archerroad.co</b></span><span>Subject <b>Stay in Touch · October 2026</b></span></div>' +
+        '<p><b>First one. Next month I\'ll compare against these numbers.</b></p>' +
+        '<table class="dt"><thead><tr><th>Ring</th><th class="r">In touch</th><th class="r">Share</th></tr></thead><tbody>' + lines + '</tbody></table>' +
+        '<ul><li>' + totalTurn + ' people are waiting on a reply from you.</li><li>You have room for 2 more in your Inner ring.</li><li>I couldn\'t find ' + DATA.filter(function (p) { return p.state === "nodata"; }).length + ' of your people anywhere. Worth linking their contact cards.</li><li>A number that isn\'t in your contacts has texted you 33 times since July. Who is it?</li></ul>' +
+        '<p>Did you see anyone in person this month who isn\'t in here? Just reply with their name.</p><p class="ink3">Reply "pause" to stop these.</p></div>';
+    }
+  };
+
+  var person = function (name) {
+    var p = DATA.filter(function (x) { return x.name === name; })[0]; if (!p) return "";
+    $("screenTitle").textContent = p.name.replace(/\s*\(.*\)$/, ""); $("screenMeta").textContent = "";
+    var s = shown(p);
+    var note = "";
+    if (urgent(p) && !p.turn) note = '<div class="callout callout--urgent"><b>It\'s been a while</b><span>' + p.days + ' days since you two talked one-on-one, and they\'re in your ' + p.ring + ' ring.' + (p.group !== null && p.group <= 14 ? ' You were both in a group chat ' + (p.group === 0 ? 'today' : p.group + ' days ago') + ', which is something, but it isn\'t the same.' : '') + '</span></div>';
+    else if (p.turn) note = '<div class="callout ' + (urgent(p) ? 'callout--urgent' : 'callout--info') + '"><b>' + (urgent(p) ? 'Your turn, and it\'s been a while' : 'Your turn') + '</b><span>' + wrote(p.turn_channel) + ' on ' + fdate(p.turn_date) + '. You haven\'t texted, called or met up in ' + p.since_me + ' days.</span></div><div class="actions"><button class="btn" data-other="' + esc(p.name) + '">Replied another way</button></div><div class="choices" hidden></div>';
+    else if ((p.state === "dormant" || p.state === "drifting") && p.group !== null && p.group <= 14) note = '<div class="callout callout--notice"><b>Around, just not one-on-one</b><span>You were both in a group chat ' + (p.group === 0 ? "today" : p.group + " days ago") + '. That counts for a little, not a lot.</span></div>';
+    else if (p.state === "nodata") note = '<div class="callout callout--notice"><b>Can\'t find them</b><span>Nothing in your texts, email or calendar matches this name. Link their contact card and they\'ll show up.</span></div>';
+    return '<button class="btn btn--quiet" data-back="1">' + ic("back") + 'Back</button>' +
+      '<div class="stack-sm"><div class="actions" style="align-items:center">' + pbadge(p) + '<span class="ring">' + (p.ring === "Out" ? "Out of rings" : p.ring + ' ring') + '</span></div></div>' + note +
+      '<dl class="kv">' +
+      '<dt>Ring</dt><dd>' + (p.ring === "Out" ? "Out of rings" : p.ring) + '</dd>' +
+      '<dt>Last talked</dt><dd>' + (p.last ? chName[p.channel] + ', ' + fdate(p.last) + ' (' + p.days + ' days)' : "None found") + '<span class="auto">auto</span></dd>' +
+      '<dt>How you talk</dt><dd>' + mix(p) + '</dd>' +
+      '<dt>You last reached out</dt><dd>' + (p.since_me !== null ? (p.since_me === 0 ? 'Today' : p.since_me + ' days ago') : "Not that I can see") + '<span class="auto">auto</span></dd>' +
+      '<dt>Group chats</dt><dd>' + (p.group !== null ? (p.group === 0 ? "Both active today" : p.group + " days ago") : "None together") + '<span class="auto">auto</span></dd>' +
+      '<dt>Lately feels like</dt><dd>' + (p.seen ? (p.seen === "none" ? "Out of touch" : p.seen + " ring") : "Hard to say") + '<span class="auto">auto</span></dd>' +
+      '<dt>City</dt><dd class="ink3">Not set</dd><dt>Role</dt><dd class="ink3">Not tagged</dd></dl>' +
+      '<div class="actions"><button class="btn" data-ringset="' + esc(p.name) + '">Change ring</button><button class="btn" data-other="' + esc(p.name) + '" data-mode="log">Log contact</button></div><div class="choices" hidden></div>';
+  };
+
+  // ---------- saved actions (db capability; page works without it) ----------
+  var BUILT = "__BUILT__", TODAY = new Date().toISOString().slice(0, 10), DB = null, ACT = {}, chain = {};
+  var slug = function (n) { return n.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 120) || "x"; };
+  var byName = function (n) { return DATA.filter(function (x) { return x.name === n; })[0]; };
+  var dayDiff = function (a, b) { return Math.round((Date.parse(b) - Date.parse(a)) / 864e5); };
+  var applyRing = function (p, r) { p.ring = r; if (THR[r] && p.days !== null) { var t = THR[r]; p.state = p.days <= t ? "live" : p.days <= 2 * t ? "drifting" : "dormant"; p.seen = ["Inner", "Close", "Keep", "Wide"].filter(function (k) { return p.days <= THR[k]; })[0] || "none"; } };
+  var applyAct = function (p, a) {
+    if (!a) return;
+    if (a.ring && a.ring !== p.ring) applyRing(p, a.ring);
+    if (a.logged && a.logged.date && (!p.last || a.logged.date >= p.last)) {
+      var d = Math.max(0, dayDiff(a.logged.date, BUILT));
+      p.turn = false; p.channels = p.channels || {}; p.channels[a.logged.channel] = a.logged.date; p.last = a.logged.date; p.days = d; p.channel = a.logged.channel; p.since_me = d;
+      if (THR[p.ring]) applyRing(p, p.ring);
+    }
+    if (a.done && a.done >= BUILT) { p.doneWeek = true; p.turn = false; }
+    if (a.snoozeUntil && a.snoozeUntil > TODAY) p.snoozed = true;
+    if (a.rest) p.rest = true;
+  };
+  var save = function (name, patch) {
+    var k = slug(name), next = Object.assign({}, ACT[k] || { name: name }, patch);
+    Object.keys(next).forEach(function (f) { if (next[f] === null) delete next[f]; });
+    ACT[k] = next;
+    if (!DB) return;
+    chain[k] = (chain[k] || Promise.resolve()).then(function () { return DB.doc("actions/" + k).set(Object.assign({}, next, { at: new Date().toISOString() })); }).catch(function (e) {
+      if (e && e.code === "quota_exceeded") toast("Couldn't save that. Storage is full.");
+      else if (e && e.code === "unavailable") return new Promise(function (r) { setTimeout(r, 800 + Math.random() * 800); }).then(function () { return DB.doc("actions/" + k).set(next); }).catch(function () {});
+    });
+  };
+  var prevOf = function (name) { var k = slug(name); return ACT[k] ? JSON.parse(JSON.stringify(ACT[k])) : null; };
+  var restore = function (name, prev) {
+    var k = slug(name);
+    if (prev) { ACT[k] = prev; if (DB) chain[k] = (chain[k] || Promise.resolve()).then(function () { return DB.doc("actions/" + k).set(prev); }).catch(function () {}); }
+    else { delete ACT[k]; if (DB) chain[k] = (chain[k] || Promise.resolve()).then(function () { return DB.doc("actions/" + k).delete(); }).catch(function () {}); }
+  };
+  (function init() {
+    var c = window.claude; if (!c || !c.use) return;
+    c.use("db").then(function (db) {
+      if (!db) return; DB = db;
+      return db.collection("actions").get().then(function (snap) {
+        snap.docs.forEach(function (d) { var v = d.data(); if (v && v.name) { ACT[d.id] = JSON.parse(JSON.stringify(v)); applyAct(byName(v.name), v); } });
+        if (!$("page-overview").hidden) renderOverview(); else if (!$("screen").querySelector("[data-back]")) show(current);
+      });
+    }).catch(function () {});
+  })();
+
+  var current = "rings", filter = "All", done = 0, undoFn = null, timer = null;
+  var toast = function (msg, fn) { undoFn = fn; $("toastText").textContent = msg; $("toast").hidden = false; clearTimeout(timer); timer = setTimeout(function () { $("toast").hidden = true; }, 6000); };
+  var setDone = function () { $("doneCount").textContent = done + " of 3"; $("doneBar").style.width = (done / 3 * 100) + "%"; };
+  var labels = { rings: ["Rings", "target"], week: ["This week", "calendar"], people: ["People", "users"], report: ["Report", "chart"] };
+  Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (t) { var l = labels[t.dataset.tab]; t.innerHTML = ic(l[1]) + l[0]; });
+  var show = function (tab, html) {
+    current = tab;
+    $("screen").innerHTML = html || (tab === "people" ? screens.people(filter) : screens[tab]());
+    Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (t) { if (t.dataset.tab === tab) t.setAttribute("aria-current", "page"); else t.removeAttribute("aria-current"); });
+    if (tab === "week") { done = DATA.filter(function (x) { return x.doneWeek; }).length; if ($("doneCount")) setDone(); }
+  };
+  show("rings");
+
+  document.querySelector(".tabbar").addEventListener("click", function (e) { var t = e.target.closest(".tab"); if (t) show(t.dataset.tab); });
+  $("screen").addEventListener("click", function (e) {
+    var p = e.target.closest("[data-person]"), f = e.target.closest("[data-filter]"), m = e.target.closest("[data-more]"), b = e.target.closest("[data-back]"), d = e.target.closest("[data-done]");
+    if (p) { var from = current; show(from, person(p.dataset.person)); $("screen").dataset.from = from; $("screen").scrollIntoView({ block: "nearest" }); return; }
+    if (b) { show($("screen").dataset.from || "rings"); return; }
+    if (f) { filter = f.dataset.filter; show("people"); return; } var rg = e.target.closest("[data-ring]"); if (rg) { var on = rg.getAttribute("aria-pressed") === "true"; show("rings", screens.rings(on ? null : rg.dataset.ring)); return; }
+    if (m) { m.parentNode.querySelectorAll(".prow").length; var r = m.dataset.more; var a = inRing(r).slice().sort(sortP).filter(function (x) { return shown(x) !== "live"; }); m.previousElementSibling.innerHTML = a.map(row).join(""); m.remove(); return; }
+    var o = e.target.closest("[data-other]"), lg = e.target.closest("[data-log]");
+    var rs = e.target.closest("[data-ringset]"), rp = e.target.closest("[data-pickring]");
+    if (rs) { var bx = rs.parentNode.nextElementSibling; var me = DATA.filter(function (x) { return x.name === rs.dataset.ringset; })[0];
+      if (bx.hidden || bx.dataset.kind !== "ring") { bx.dataset.kind = "ring"; bx.innerHTML = '<span class="small ink2">Where do they belong now?</span>' + RINGS.concat(["Out"]).map(function (r) { var n = inRing(r).length, full = CAP[r] && n >= CAP[r] && me.ring !== r; return '<button class="choice" data-pickring="' + r + '" data-who="' + esc(me.name) + '"' + (me.ring === r ? ' aria-pressed="true"' : '') + '>' + (r === "Out" ? "Out of rings" : r + ' · ' + n + ' of ' + CAP[r] + (full ? ' · full' : '')) + '</button>'; }).join(""); bx.hidden = false; }
+      else bx.hidden = true;
+      return; }
+    if (rp) { var who2 = DATA.filter(function (x) { return x.name === rp.dataset.who; })[0], before = who2.ring, to = rp.dataset.pickring;
+      if (to === before) return;
+      var setRing = function (r) { who2.ring = r; if (THR[r] && who2.days !== null) { var t = THR[r]; who2.state = who2.days <= t ? "live" : who2.days <= 2 * t ? "drifting" : "dormant"; who2.seen = ["Inner","Close","Keep","Wide"].filter(function (k) { return who2.days <= THR[k]; })[0] || "none"; } };
+      var prevR = prevOf(who2.name); setRing(to); save(who2.name, { ring: to }); show(current, person(who2.name));
+      var fullNote = CAP[to] && inRing(to).length > CAP[to] ? " · " + to + " is over its cap of " + CAP[to] : "";
+      toast("Moved to " + (to === "Out" ? "out of rings" : to) + fullNote, function () { setRing(before); restore(who2.name, prevR); show(current, person(who2.name)); });
+      return; }
+    if (o) { var box = o.parentNode.nextElementSibling; var kind = o.dataset.mode || "reply"; if (box.hidden || box.dataset.kind !== kind) { box.dataset.kind = kind; box.innerHTML = choices(o.dataset.other, o.dataset.mode); box.hidden = false; } else box.hidden = true; return; }
+    if (lg) {
+      var who = DATA.filter(function (x) { return x.name === lg.dataset.log; })[0], c = lg.dataset.ch, snap = JSON.stringify(who), prevL = prevOf(who.name);
+      save(who.name, { logged: { channel: c, date: TODAY } });
+      who.turn = false; who.channels = who.channels || {}; who.channels[c] = "2026-10-16"; who.last = "2026-10-16"; who.days = 0; who.channel = c; who.state = "live"; who.seen = who.ring; who.since_me = 0;
+      var card = lg.closest(".pick"), box2 = lg.parentNode;
+      if (card) {
+        var db = card.querySelector("[data-done]"); box2.hidden = true;
+        if (db && !db.classList.contains("is-done")) { db.classList.add("is-done"); db.textContent = "Done"; done++; setDone(); who.doneWeek = true; save(who.name, { done: TODAY }); }
+        box2.insertAdjacentHTML("afterend", '<span class="logged">' + ic("check") + 'Logged: ' + chName[c] + ', today</span>');
+      } else { show(current, person(who.name)); }
+      toast("Got it. " + chName[c] + " with " + who.name.replace(/\s*\(.*\)$/, "").split(" ")[0] + ", today.", function () {
+        Object.assign(who, JSON.parse(snap)); restore(who.name, prevL);
+        if (card) { who.doneWeek = false; var db2 = card.querySelector("[data-done]"); if (db2) { db2.classList.remove("is-done"); db2.textContent = "Mark done"; done--; setDone(); } var lgd = card.querySelector(".logged"); if (lgd) lgd.remove(); }
+        else { show(current, person(who.name)); }
+      });
+      return;
+    }
+    var sz = e.target.closest("[data-snooze]");
+    if (sz) { var zp = byName(sz.dataset.snooze), prevZ = prevOf(zp.name), until = new Date(Date.now() + 14 * 864e5).toISOString().slice(0, 10);
+      zp.snoozed = true; save(zp.name, { snoozeUntil: until }); show("week");
+      toast("Snoozed until " + fdate(until) + ".", function () { zp.snoozed = false; restore(zp.name, prevZ); show("week"); }); return; }
+    if (d && !d.classList.contains("is-done")) {
+      var dp = byName(d.dataset.done), prevD = prevOf(dp.name), wasTurn = dp.turn;
+      d.classList.add("is-done"); d.textContent = "Done"; done++; setDone(); dp.doneWeek = true; dp.turn = false; save(dp.name, { done: TODAY });
+      toast("Nice. " + d.dataset.done.replace(/\s*\(.*\)$/, "").split(" ")[0] + " is off the list.", function () { d.classList.remove("is-done"); d.textContent = "Mark done"; done--; setDone(); dp.doneWeek = false; dp.turn = wasTurn; restore(dp.name, prevD); });
+    }
+  });
+
+  // ---------- pages ----------
+  var pageTo = function (pg) {
+    pg = pg === "overview" ? "overview" : "app";
+    $("page-app").hidden = pg !== "app"; $("page-overview").hidden = pg !== "overview";
+    Array.prototype.forEach.call(document.querySelectorAll("[data-page]"), function (a) { if (a.dataset.page === pg) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    if (pg === "overview") renderOverview();
+    window.scrollTo(0, 0);
+  };
+  document.querySelector(".topnav nav").addEventListener("click", function (e) { var a = e.target.closest("[data-page]"); if (!a) return; e.preventDefault(); try { history.replaceState(null, "", "#" + a.dataset.page); } catch (x) {} pageTo(a.dataset.page); });
+  window.addEventListener("hashchange", function () { pageTo(location.hash.slice(1)); });
+
+  // ---------- overview ----------
+  var NS = function (tag, attrs) { return '<' + tag + Object.keys(attrs).map(function (k) { return ' ' + k + '="' + attrs[k] + '"'; }).join("") + '/>'; };
+  var renderOverview = function () {
+    var totalTurnNow = DATA.filter(function (p) { return p.turn; }).length, urgNow = DATA.filter(urgent).length;
+    var W = WEEKLY;
+    $("ovStamp").textContent = "Updated Fri 16 Oct" + (W ? " · trends go back to " + W.weeks[0].label : "");
+    var reachedNow = W ? W.weeks[W.weeks.length - 1].reached : null;
+    var quiet = DATA.filter(function (p) { return p.state === "drifting" || p.state === "dormant"; }).length;
+    $("today").innerHTML =
+      '<div><b>' + totalTurnNow + '</b><span>waiting on you</span></div>' +
+      '<div><b class="' + (urgNow ? 'is-urgent' : '') + '">' + urgNow + '</b><span>been a while</span></div>' +
+      '<div><b>' + quiet + '</b><span>gone quieter than you\'d like</span></div>' +
+      (reachedNow !== null ? '<div><b>' + reachedNow + '</b><span>talked to this week</span></div>' : '');
+    if (!W) { $("chRingsNote").textContent = "No trend data yet."; return; }
+    var weeks = W.weeks, n = weeks.length;
+    // then vs now
+    (function () {
+      var back = Math.max(0, n - 5), then = weeks[back], now = weeks[n - 1], tg = W.targets || {};
+      $("thenNow").innerHTML = RINGS.map(function (r) {
+        var a = then.live[r], b = now.live[r], g = tg[r], lo = Math.min(a, b), hi = Math.max(a, b), d = b - a;
+        var cnt = inRing(r).filter(function (p) { return p.state === "live"; }).length + " of " + inRing(r).length;
+        return '<div class="tn"><span class="tn__name">' + r + '</span><div class="tn__track" role="img" aria-label="' + r + ': ' + b + ' percent now, ' + a + ' four weeks ago' + (g ? ', target ' + g : '') + '">' +
+          '<span class="tn__bar" style="left:' + lo + '%;width:' + (hi - lo) + '%"></span>' + (g ? '<span class="tn__goal" style="left:' + g + '%" title="Target ' + g + '%"></span>' : '') +
+          '<span class="tn__dot tn__dot--then" style="left:' + a + '%"></span><span class="tn__dot tn__dot--now" style="left:' + b + '%"></span></div>' +
+          '<span class="tn__num"><b>' + b + '%</b>' + (d ? '<span class="' + (d > 0 ? 'up' : 'down') + '">' + (d > 0 ? '+' : '') + d + '</span> vs ' + then.label : 'same as ' + then.label) + '<br><span class="cap ink3">' + cnt + (g ? ' · target ' + g + '%' : '') + '</span></span></div>';
+      }).join("") + '<div class="legend" style="margin-top:8px"><span><i class="tn__dot--then" style="position:static;display:inline-block;width:10px;height:10px;border-radius:50%;border:2px solid var(--border-strong)"></i>' + then.label + '</span><span><i style="width:10px;height:10px;border-radius:50%;background:var(--action)"></i>Now</span><span><i style="width:2px;height:12px;background:var(--urgent)"></i>Target (draft, edit in settings)</span></div>';
+      $("chRingsNote").textContent = W.note;
+    })();
+    // heatmap: Inner + Close
+    (function () {
+      var H = W.heat || [], cols = weeks.length;
+      var lab = { live: "In touch", turn: "Waiting on you", drifting: "Slipping", dormant: "Gone quiet", nodata: "No data" };
+      var html = '', cur = null;
+      H.forEach(function (row) {
+        if (row.ring !== cur) { cur = row.ring; html += '<div class="heat__row" style="--cols:' + cols + '"><span class="heat__ring">' + cur + '</span></div>'; }
+        html += '<div class="heat__row" style="--cols:' + cols + '"><span class="heat__name" title="' + esc(row.name) + '">' + esc(row.name.replace(/\s*\(.*\)$/, "")) + '</span>' +
+          row.states.map(function (st, i) { return '<span class="hc hc--' + st + '" title="' + weeks[i].label + ': ' + lab[st] + '"></span>'; }).join("") + '</div>';
+      });
+      html += '<div class="heat__row" style="--cols:' + cols + '"><span></span>' + weeks.map(function (wk, i) { return '<span class="heat__axis">' + (i % 4 === 0 || i === cols - 1 ? wk.label : '') + '</span>'; }).join("") + '</div>';
+      $("heat").innerHTML = html;
+      $("heatLegend").innerHTML = ["live", "turn", "drifting", "dormant"].map(function (k) { return '<span><i class="hc hc--' + k + '" style="width:12px;height:12px"></i>' + lab[k] + '</span>'; }).join("");
+    })();
+    // gap bars: Keep + Wide
+    (function () {
+      var G = W.gaps || {}, segs = [["turn", "Waiting on you", "var(--action)"], ["drifting", "Slipping", "var(--navy-line)"], ["dormant", "Gone quiet", "var(--border-strong)"]];
+      ["Keep", "Wide"].forEach(function (r) {
+        var rows = G[r] || [], w = 360, h = 190, L = 28, R = 8, T = 18, B = 26, bw = (w - L - R) / rows.length;
+        var tot = rows.map(function (x) { return x.turn + x.drifting + x.dormant; }), max = Math.ceil((Math.max.apply(null, tot) || 1) / 5) * 5;
+        var Y = function (v) { return T + (1 - v / max) * (h - T - B); }, g = '';
+        [0, max / 2, max].forEach(function (v) { g += NS("line", { x1: L, x2: w - R, y1: Y(v), y2: Y(v), stroke: "var(--border)" }) + '<text x="' + (L - 5) + '" y="' + (Y(v) + 4) + '" text-anchor="end">' + v + '</text>'; });
+        rows.forEach(function (x, i) {
+          var base = 0, bx = L + i * bw + 1.5, bwid = Math.max(2, bw - 3);
+          segs.forEach(function (sg) { var v = x[sg[0]]; if (!v) return; g += NS("rect", { x: bx.toFixed(1), y: Y(base + v).toFixed(1), width: bwid.toFixed(1), height: (Y(base) - Y(base + v)).toFixed(1), fill: sg[2] }); base += v; });
+          if (i % 6 === 0 || i === rows.length - 1) g += '<text x="' + (bx + bwid / 2) + '" y="' + (h - 8) + '" text-anchor="middle">' + weeks[i].label + '</text>';
+        });
+        var last = rows[rows.length - 1] || { turn: 0, drifting: 0, dormant: 0 };
+        g += '<text class="lbl" x="' + (w - R) + '" y="' + (T - 6) + '" text-anchor="end">Now ' + (last.turn + last.drifting + last.dormant) + ' of ' + inRing(r).length + '</text>';
+        var sv = $("gap" + r); sv.setAttribute("viewBox", "0 0 " + w + " " + h); sv.innerHTML = g;
+      });
+      $("gapLegend").innerHTML = segs.map(function (sg) { return '<span style="--sw:' + sg[2] + '">' + sg[1] + '</span>'; }).join("");
+    })();
+    // most in touch
+    (function () {
+      var TOP = W.top;
+      if (!TOP) { $("topTable").innerHTML = ""; $("topNote").textContent = "Still counting."; return; }
+      var draw = function (k) {
+        var rows = TOP[k];
+        $("topTable").innerHTML = '<thead><tr><th>#</th><th>Person</th><th>Ring</th><th class="n">Days in touch</th><th class="n">Texts</th><th class="n">WhatsApp</th><th class="n">Calls</th><th class="n">Meetings</th></tr></thead><tbody>' +
+          rows.map(function (x, i) { return '<tr><td data-label="Rank">' + (i + 1) + '</td><td>' + esc(x.name) + '</td><td data-label="Ring">' + (x.ring || "None") + '</td><td class="n" data-label="Days in touch"><b>' + x.days + '</b></td><td class="n" data-label="Texts">' + x.text + '</td><td class="n" data-label="WhatsApp">' + x.wa + '</td><td class="n" data-label="Calls">' + x.call + '</td><td class="n" data-label="Meetings">' + x.cal + '</td></tr>'; }).join("") + '</tbody>';
+        Array.prototype.forEach.call(document.querySelectorAll("#topSeg button"), function (b) { b.setAttribute("aria-pressed", String(b.dataset.win === k)); });
+      };
+      draw("d30");
+      $("topSeg").onclick = function (e) { var b = e.target.closest("[data-win]"); if (b) draw(b.dataset.win); };
+      $("topNote").textContent = TOP.note;
+    })();
+    // bars
+    var bars = function (id, key, urgKey) {
+      var w = 360, h = 180, L = 28, R = 8, T = 14, B = 26, max = Math.max.apply(null, weeks.map(function (k) { return k[key]; })) || 1;
+      max = Math.ceil(max / 5) * 5; var bw = (w - L - R) / n, Y = function (v) { return T + (1 - v / max) * (h - T - B); };
+      var g = '';
+      [0, max / 2, max].forEach(function (v) { g += NS("line", { x1: L, x2: w - R, y1: Y(v), y2: Y(v), stroke: "var(--border)" }) + '<text x="' + (L - 5) + '" y="' + (Y(v) + 4) + '" text-anchor="end">' + v + '</text>'; });
+      weeks.forEach(function (k, i) {
+        var x = L + i * bw + 1.5, bwid = Math.max(2, bw - 3), v = k[key], u = urgKey ? k[urgKey] : 0;
+        g += NS("rect", { x: x.toFixed(1), y: Y(v).toFixed(1), width: bwid.toFixed(1), height: (Y(0) - Y(v)).toFixed(1), fill: "var(--action)", rx: 1 });
+        if (u) g += NS("rect", { x: x.toFixed(1), y: Y(v).toFixed(1), width: bwid.toFixed(1), height: (Y(0) - Y(u)).toFixed(1), fill: "var(--urgent-fill)", rx: 1 });
+        if (i % 6 === 0 || i === n - 1) g += '<text x="' + (x + bwid / 2) + '" y="' + (h - 8) + '" text-anchor="middle">' + k.label + '</text>';
+      });
+      var last = weeks[n - 1]; g += '<text class="lbl" x="' + (w - R) + '" y="' + (T - 2) + '" text-anchor="end">Now ' + last[key] + (urgKey && last[urgKey] ? ' · ' + last[urgKey] + ' been a while' : '') + '</text>';
+      var sv = $(id); sv.setAttribute("viewBox", "0 0 " + w + " " + h); sv.innerHTML = g;
+    };
+    bars("chTurn", "turn", "urgent"); bars("chReach", "reached");
+    // movers
+    $("movers").innerHTML = W.movers.length ? W.movers.map(function (m) { return '<div class="mover"><span><b>' + esc(m.name) + '</b> <span class="ink3">' + m.ring + '</span></span><span>' + ST[m.from][0] + ' → ' + ST[m.to][0] + '</span></div>'; }).join("") + '<p class="cap ink3">Compared with last Sunday.</p>' : '<p class="small ink2">Nobody moved since Sunday.</p>';
+    // coverage
+    $("coverage").innerHTML = '<dl style="margin:0">' + W.coverage.map(function (c) { return '<div class="covrow"><dt>' + c[0] + '</dt><dd>' + c[1] + '</dd></div>'; }).join("") + '</dl>';
+  };
+  (function () { var O = (WEEKLY && WEEKLY.outside) || { rows: [], note: "" };
+    $("outsideRows").innerHTML = O.rows.map(function (r) { return '<tr><td>' + esc(r[0]) + '</td><td data-label="Sent">' + esc(r[1]) + '</td><td data-label="Date" class="mono">' + esc(r[2]) + '</td><td data-label="Ring">' + esc(r[3]) + '</td></tr>'; }).join("");
+    $("outsideNote").textContent = O.note; })();
+  pageTo(location.hash.slice(1));
+  $("undo").addEventListener("click", function () { if (undoFn) { undoFn(); undoFn = null; } $("toast").hidden = true; });
+})();
+</script>

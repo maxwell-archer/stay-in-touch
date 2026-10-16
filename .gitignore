@@ -1,0 +1,7 @@
+# Personal relationship data never leaves this Mac
+data/
+dist/
+*.sqlite
+*.json.bak
+__pycache__/
+.env

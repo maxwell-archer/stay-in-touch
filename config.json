@@ -1,0 +1,32 @@
+{
+  "artifact_url": "https://claude.ai/artifact/V4uLGVAocgCVVPZvLjng4h",
+  "thresholds_days": {
+    "Inner": 7,
+    "Close": 21,
+    "Keep": 60,
+    "Wide": 180
+  },
+  "caps": {
+    "Inner": 5,
+    "Close": 15,
+    "Keep": 50,
+    "Wide": 150
+  },
+  "targets_pct": {
+    "Inner": 100,
+    "Close": 90,
+    "Keep": 75,
+    "Wide": 70
+  },
+  "nudge": {
+    "enabled": false,
+    "time": "12:30",
+    "weekdays_only": true
+  },
+  "report": {
+    "to": "maxwell@archerroad.co",
+    "mode": "draft",
+    "when": "first Sunday of the month"
+  },
+  "sync": "weekly, Sunday 7:00 am"
+}
