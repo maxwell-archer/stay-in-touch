@@ -19,7 +19,7 @@
     "Wide": 70
   },
   "nudge": {
-    "enabled": false,
+    "enabled": true,
     "time": "12:30",
     "weekdays_only": true
   },
