@@ -155,6 +155,41 @@ for r in ("Keep", "Wide"):
     gaps[r] = rows
 
 
+# ---------- chart cards: who moved over the last four weeks ----------
+w_then, w_now = ends[-5], ends[-1]
+
+
+def tag(n, **kw):
+    return dict(name=n, ring=rings[n], **kw)
+
+
+def reached_in(n, w):
+    ws = w - dt.timedelta(days=6)
+    return any(ws <= x <= w for x in P[n]["contact"])
+
+
+cards = dict(since=label(w_then))
+for r in ("Keep", "Wide"):
+    quiet, back = [], []
+    for n in (x for x in ringed if rings[x] == r):
+        a, b = shown_at(n, w_then), shown_at(n, w_now)
+        if "nodata" in (a, b):
+            continue
+        if a == "live" and b in ("drifting", "dormant"):
+            quiet.append(tag(n, to=b, days=state_at(n, w_now)["days"]))
+        elif a != "live" and b == "live":
+            back.append(tag(n, frm=a))
+    quiet.sort(key=lambda x: -(x["days"] or 0)); back.sort(key=lambda x: x["name"])
+    cards[r] = dict(quiet=quiet, back=back)
+was = {n: state_at(n, w_then)["turn"] for n in ringed}
+cards["turn"] = dict(new=sorted((tag(n) for n in ringed if state_at(n, w_now)["turn"] and not was[n]), key=lambda x: x["name"]),
+                     cleared=sorted((tag(n) for n in ringed if was[n] and not state_at(n, w_now)["turn"]), key=lambda x: x["name"]))
+now_set = {n for n in ringed if reached_in(n, w_now)}
+prev = {n: sum(reached_in(n, ends[-1 - k]) for k in range(1, 5)) for n in ringed}
+by_ring = lambda x: (ORDER.index(x["ring"]), x["name"])
+cards["reach"] = dict(missed=sorted((tag(n) for n in ringed if n not in now_set and prev[n] >= 3), key=by_ring),
+                      fresh=sorted((tag(n) for n in now_set if prev[n] == 0), key=by_ring))
+
 # ---------- most in touch ----------
 def top(days_back, n_rows=20):
     lo = T - dt.timedelta(days=days_back - 1); rows = []
@@ -173,7 +208,7 @@ TOP = dict(d30=top(30), d12=top(365),
            note="Days in touch counts a day once, however many ways you talked. Call history fills in week by week from 24 Sep 2026.")
 unringed_heavy = [r["name"] for r in TOP["d30"] if not r["ring"] and r["days"] >= 8 and not r["name"].startswith("(unsaved)")]
 
-WEEKLY = dict(weeks=weeks, movers=movers[:12], heat=heat, gaps=gaps, targets=CFG["targets_pct"], top=TOP,
+WEEKLY = dict(weeks=weeks, movers=movers[:12], heat=heat, gaps=gaps, cards=cards, targets=CFG["targets_pct"], top=TOP,
               outside=load("outside.json", {"rows": [], "note": ""}),
               note="Your rings are applied to every week, even though you set them on 16 Oct 2026.",
               coverage=[["Texts", "Every one-to-one text and voice memo."],
