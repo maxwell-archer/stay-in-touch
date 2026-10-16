@@ -255,11 +255,12 @@ h3 { font-weight: 500; }
 .card { border-color: var(--border); }
 .toast { background: var(--navy); color: var(--on-navy); border: 0; }
 .toast .btn--quiet { color: var(--on-navy-2); }
+.toast[hidden] { display: none; }
 
 /* Navy ring summary panel (Rings home) */
 .splash { background: var(--navy); color: var(--on-navy); padding: var(--s5) var(--screen-pad) var(--s6); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s5) var(--s4); }
 @media (min-width: 560px) { .splash { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-.sring { font: inherit; color: inherit; background: none; border: 0; text-align: left; padding: 0; cursor: pointer; display: grid; gap: 6px; }
+.sring { font: inherit; color: inherit; background: none; border: 0; text-align: left; padding: 0; cursor: pointer; display: grid; gap: 6px; align-content: start; }
 .sring__name { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-navy-2); }
 .sring__pct { font-size: 36px; font-weight: 300; line-height: 1; font-variant-numeric: tabular-nums; }
 .sring__line { height: 2px; background: oklch(100% 0 0 / 0.18); }
